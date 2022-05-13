@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input id="meno_hodnoty" type="text" placeholder="Meno hodnoty...">
+        <input id="hodnota" type="text" placeholder="hodnota...">
+        <button onclick="kliknisem()" type="button" id="btn" > Vložiť údaje </button>
+        <button onclick="kliknireset()" type="button" id="btnr" > Resetovať údaje </button>
+    </form>
+    
+
+    <div id="container" ></div>
+
+
+    <script>
+
+        sessionStorage.setItem( "Značka", "adidas")
+        sessionStorage.setItem( "počet", "20")
+        sessionStorage.setItem( "lokácia", "sever")
+
+        localStorage.setItem( "Meno", "Dominik" );
+        localStorage.setItem("vek", "30");
+        console.log(localStorage);
+        console.log(localStorage.key(2));
+
+
+        let zoznam = JSON.parse(localStorage.getItem("zoznam"));
+        let Divcont = document.getElementById('container');
+        
+
+        if(zoznam == null){
+            zoznam = [];
+        }
+
+        console.log(zoznam);
+
+        for(let i = 0; i < zoznam.length; i++){
+            Divcont.innerHTML += "<p>"+ 'meno:   ' + zoznam[i].meno + "<br>"  + 'hodnota:   ' + zoznam[i].hodnota + "</p>";
+        }
+        function kliknisem(){
+            let Meno_hodnoty = document.getElementById('meno_hodnoty').value;
+            let Hodnota = document.getElementById('hodnota').value;
+            Divcont.innerHTML += "<p>"+ 'meno:  ' + Meno_hodnoty + "<br>" + 'hodnota:   ' + Hodnota + "</p>";
+            zoznam.push({meno: Meno_hodnoty, hodnota: Hodnota});
+            localStorage.setItem('zoznam',JSON.stringify(zoznam));
+            document.forms[0].reset();
+        }
+        function kliknireset(){
+            zoznam = [];
+            container.innerHTML = "";
+            localStorage.setItem('zoznam',JSON.stringify(zoznam));
+            document.forms[0].reset();
+        }
+
+
+        // sessionStorage_____sessionStorage______sessionStorage_____sessionStorage
+
+
+        
+
+        // let zoznam = JSON.parse(sessionStorage.getItem("zoznam"));
+        // let Divcont = document.getElementById('container');
+        
+
+        // if(zoznam == null){
+        //     zoznam = [];
+        // }
+
+        // console.log(zoznam);
+
+        // for(let i = 0; i < zoznam.length; i++){
+        //     Divcont.innerHTML += "<p>"+ 'meno:   ' + zoznam[i].meno + "<br>"  + 'hodnota:   ' + zoznam[i].hodnota + "</p>";
+        // }
+        // function kliknisem(){
+        //     let Meno_hodnoty = document.getElementById('meno_hodnoty').value;
+        //     let Hodnota = document.getElementById('hodnota').value;
+        //     Divcont.innerHTML += "<p>"+ 'meno:  ' + Meno_hodnoty + "<br>" + 'hodnota:   ' + Hodnota + "</p>";
+        //     zoznam.push({meno: Meno_hodnoty, hodnota: Hodnota});
+        //     sessionStorage.setItem('zoznam',JSON.stringify(zoznam));
+        //     document.forms[0].reset();
+        // }
+        // function kliknireset(){
+        //     zoznam = [];
+        //     container.innerHTML = "";
+        //     sessionStorage.setItem('zoznam',JSON.stringify(zoznam));
+        //     document.forms[0].reset();
+        // }
+
+
+    </script>
+</body>
+</html>
+
